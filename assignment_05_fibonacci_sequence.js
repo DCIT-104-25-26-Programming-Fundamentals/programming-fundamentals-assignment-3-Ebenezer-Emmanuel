@@ -55,3 +55,110 @@
 // =============================================================================
 
 
+const readlineSync = require('readline-sync');
+
+// PART A — Print the First N Terms
+
+function generateFibonacci(n) {
+  
+  if (isNaN(n) || n <= 0) {
+    console.log('Error: Please enter a positive integer.');
+    return;
+  }
+
+  const sequence = [];
+  let a = 0;
+  let b = 1;
+
+  for (let i = 0; i < n; i++) {
+    sequence.push(a);
+    let nextTerm = a + b;
+    a = b;
+    b = nextTerm;
+  }
+
+  console.log(`Fibonacci sequence: ${sequence.join(' ')}`);
+}
+
+function runPartA() {
+  console.log('\n--- PART A: Print First N Terms ---');
+  const input = readlineSync.question('How many terms? ');
+  const n = parseInt(input, 10);
+  generateFibonacci(n);
+}
+
+
+// PART B — Check if a Number Belongs to the Sequence
+
+function isFibonacciNumber(num) {
+  if (isNaN(num) || num < 0) {
+    console.log(`${num} is NOT a Fibonacci number.`);
+    return;
+  }
+
+  // 0 and 1 are valid Fibonacci numbers right away
+  if (num === 0 || num === 1) {
+    console.log(`${num} is a Fibonacci number.`);
+    return;
+  }
+
+  let a = 0;
+  let b = 1;
+  let current = a + b;
+
+  
+  while (current < num) {
+    a = b;
+    b = current;
+    current = a + b;
+  }
+
+  if (current === num) {
+    console.log(`${num} is a Fibonacci number.`);
+  } else {
+    console.log(`${num} is NOT a Fibonacci number.`);
+  }
+}
+
+function runPartB() {
+  console.log('\n--- PART B: Check a Number ---');
+  const input = readlineSync.question('Enter a number to check: ');
+  const target = parseInt(input, 10);
+  isFibonacciNumber(target);
+}
+
+
+// MAIN MENU LOOP
+
+function main() {
+  let running = true;
+
+  while (running) {
+    console.log('\n---------------------------------');
+    console.log('      FIBONACCI PROGRAM MENU     ');
+    console.log('---------------------------------');
+    console.log('1. Print first N terms (Part A)');
+    console.log('2. Check if a number is Fibonacci (Part B)');
+    console.log('3. Exit');
+
+    const choice = readlineSync.question('\nSelect an option (1-3): ');
+
+    switch (choice.trim()) {
+      case '1':
+        runPartA();
+        break;
+      case '2':
+        runPartB();
+        break;
+      case '3':
+        console.log('\nGoodbye!');
+        running = false;
+        break;
+      default:
+        console.log('\nInvalid choice, pick 1, 2, or 3.');
+    }
+  }
+}
+
+// Start execution
+main();

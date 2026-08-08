@@ -60,3 +60,67 @@
 // =============================================================================
 
 
+const readlineSync = require("readline-sync");
+
+// Part A - Print the multiplication table for one number
+function singleTable() {
+    let input = readlineSync.question("Enter a number: ");
+    let number = parseInt(input);
+
+    if (isNaN(number) || number <= 0) {
+        console.log("Error: Please enter a positive integer.");
+        return;
+    }
+
+    console.log("\nMultiplication Table for " + number + ":");
+
+    for (let i = 1; i <= 12; i++) {
+        console.log(number + " x " + i + " = " + (number * i));
+    }
+}
+
+// Part B - Print tables from 1 to N
+function allTables() {
+    let input = readlineSync.question("Enter a number: ");
+    let n = parseInt(input);
+
+    if (isNaN(n) || n <= 0) {
+        console.log("Error: Please enter a positive integer.");
+        return;
+    }
+
+    for (let table = 1; table <= n; table++) {
+        console.log("\nMultiplication Table for " + table + ":");
+
+        for (let i = 1; i <= 12; i++) {
+            console.log(table + " x " + i + " = " + (table * i));
+        }
+
+        console.log("---------------------------");
+    }
+}
+
+// Main menu
+let choice;
+
+do {
+    console.log("\n==============================");
+    console.log("MULTIPLICATION TABLE PROGRAM");
+    console.log("==============================");
+    console.log("1. Single Table");
+    console.log("2. Tables from 1 to N");
+    console.log("3. Exit");
+
+    choice = readlineSync.question("Choose an option: ");
+
+    if (choice === "1") {
+        singleTable();
+    } else if (choice === "2") {
+        allTables();
+    } else if (choice === "3") {
+        console.log("Goodbye!");
+    } else {
+        console.log("Invalid choice. Please try again.");
+    }
+
+} while (choice !== "3");

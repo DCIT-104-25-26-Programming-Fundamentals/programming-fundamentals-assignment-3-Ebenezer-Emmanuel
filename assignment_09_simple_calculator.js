@@ -75,3 +75,92 @@
 // =============================================================================
 
 
+const readlineSync = require('readline-sync');
+
+// Math operations
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    return a / b;
+}
+
+function modulus(a, b) {
+    return a % b;
+}
+
+function power(a, b) {
+    return a ** b;
+}
+
+function main() {
+    while (true) {
+        console.log("\n--- SIMPLE CALCULATOR ---");
+        console.log("1. Addition");
+        console.log("2. Subtraction");
+        console.log("3. Multiplication");
+        console.log("4. Division");
+        console.log("5. Modulus");
+        console.log("6. Exponentiation");
+        console.log("7. Quit");
+
+        let choice = readlineSync.questionInt("Select an operation (1-7): ");
+
+        if (choice === 7) {
+            console.log("Goodbye!");
+            break;
+        }
+
+        if (choice < 1 || choice > 7) {
+            console.log("Invalid option, try again.");
+            continue;
+        }
+
+        let num1 = readlineSync.questionFloat("Enter first number : ");
+        let num2 = readlineSync.questionFloat("Enter second number: ");
+
+        let result = 0;
+        let op = "";
+
+        if (choice === 1) {
+            result = add(num1, num2);
+            op = "+";
+        } else if (choice === 2) {
+            result = subtract(num1, num2);
+            op = "-";
+        } else if (choice === 3) {
+            result = multiply(num1, num2);
+            op = "*";
+        } else if (choice === 4) {
+            if (num2 === 0) {
+                console.log("Error: Cannot divide by zero.");
+                continue;
+            }
+            result = divide(num1, num2);
+            op = "/";
+        } else if (choice === 5) {
+            if (num2 === 0) {
+                console.log("Error: Cannot divide by zero.");
+                continue;
+            }
+            result = modulus(num1, num2);
+            op = "%";
+        } else if (choice === 6) {
+            result = power(num1, num2);
+            op = "**";
+        }
+
+        console.log(`Result: ${num1} ${op} ${num2} = ${result.toFixed(2)}`);
+    }
+}
+
+main();

@@ -42,4 +42,41 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require('readline-sync');
 
+/**
+ * Determines whether a given number is prime.
+ * @param {number} num - The number to test.
+ * @returns {boolean} True if the number is prime, false otherwise.
+ */
+function isPrime(num) {
+    // Numbers less than 2 are not prime
+    if (num < 2) {
+        return false;
+    }
+
+    // Check divisors from 2 up to the square root of num
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) {
+            return false; // Found a factor, so it's not prime
+        }
+    }
+
+    return true; // No factors found, it is prime
+}
+
+/**
+ * Main function to execute the prime checker prompt.
+ */
+function main() {
+    const userInput = readlineSync.questionInt('Enter a number: ');
+
+    if (isPrime(userInput)) {
+        console.log(`${userInput} is a prime number.`);
+    } else {
+        console.log(`${userInput} is NOT a prime number.`);
+    }
+}
+
+// Execute the main function
+main();
